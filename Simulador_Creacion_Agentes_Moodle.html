@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EpartnerClass - Simulador Fácil & Evaluación (Nivel Básico)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-verde-lima: #7BB11D;
+            --color-amarillo-dorado: #F0A100;
+            --color-azul-turquesa: #26A3C8;
+            --color-fucsia-acento: #E10078;
+            --color-purpura-class: #5C2066;
+            
+            --bg-main: #f4f7fb;
+            --bg-card: #ffffff;
+            --bg-subtle: #eef3f9;
+            --border-light: #dce4ec;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* BARRA GLOBAL DE NAVEGACIÓN DEL CURSO (TOP APP BAR) */
+        .global-top-nav {
+            max-width: 1100px;
+            margin: 0 auto 20px auto;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .global-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .global-brand .ep { color: var(--color-azul-turquesa); }
+        .global-brand .cl { color: var(--color-purpura-class); }
+
+        .global-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .global-link-btn {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .link-home {
+            background: var(--bg-subtle);
+            color: var(--color-purpura-class);
+            border: 1px solid var(--border-light);
+        }
+
+        .link-home:hover {
+            border-color: var(--color-purpura-class);
+            background: #ffffff;
+        }
+
+        .link-steps {
+            background: var(--bg-subtle);
+            color: var(--color-purpura-class);
+            border: 1px solid var(--border-light);
+        }
+
+        .link-steps:hover {
+            border-color: var(--color-purpura-class);
+            background: #ffffff;
+        }
+
+        .link-eval {
+            background: var(--color-azul-turquesa);
+            color: #ffffff;
+        }
+
+        .moodle-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .moodle-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--color-verde-lima), var(--color-amarillo-dorado), var(--color-azul-turquesa), var(--color-fucsia-acento));
+            border-radius: 16px 16px 0 0;
+        }
+
+        /* HEADER EPARTNERCLASS */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--color-azul-turquesa);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .badge-basic {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
+            background: var(--color-verde-lima);
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .title span.ep { color: var(--color-azul-turquesa); }
+        .title span.cl { color: var(--color-purpura-class); }
+
+        .logo-box {
+            padding: 10px 18px;
+            background: var(--bg-subtle);
+            border: 2px solid var(--color-purpura-class);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .logo-box .p1 { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; color: var(--color-azul-turquesa); }
+        .logo-box .p2 { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; color: var(--color-purpura-class); margin-left: 3px; }
+
+        /* TABS */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 10px 18px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--color-purpura-class);
+            color: #ffffff;
+            border-color: var(--color-purpura-class);
+        }
+
+        /* GRID & CARDS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 850px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .card-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-purpura-class);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--color-amarillo-dorado);
+            padding-bottom: 8px;
+        }
+
+        /* FORMULARIOS */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-azul-turquesa);
+            box-shadow: 0 0 8px rgba(38, 163, 200, 0.2);
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 14px;
+            background: var(--color-verde-lima);
+            border: none;
+            border-radius: 10px;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(123, 177, 29, 0.3);
+            margin-top: 10px;
+        }
+
+        .btn-action:hover {
+            background: #6a9c18;
+        }
+
+        .console-box {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-light);
+            border-left: 4px solid var(--color-fucsia-acento);
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 13px;
+            color: var(--text-main);
+            min-height: 250px;
+            white-space: pre-wrap;
+        }
+
+        /* TABLA LISTA DE CHEQUEO BÁSICA */
+        .check-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .check-table th, .check-table td {
+            border: 1px solid var(--border-light);
+            padding: 10px 12px;
+            text-align: left;
+        }
+
+        .check-table th {
+            background: var(--bg-subtle);
+            font-family: 'Outfit', sans-serif;
+            color: var(--color-purpura-class);
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGACIÓN GLOBAL DEL CURSO -->
+<div class="global-top-nav">
+    <a href="Pantalla_Principal_Navegacion_EpartnerClass.html" class="global-brand">
+        <span class="ep">E-PARTNER</span><span class="cl">CLASS</span>
+    </a>
+    <div class="global-links">
+        <a href="Pantalla_Principal_Navegacion_EpartnerClass.html" class="global-link-btn link-home">
+            🏠 Menú Principal
+        </a>
+        <a href="Curso_Socio_Digital_EpartnerClass_App.html" class="global-link-btn link-steps">
+            📚 Pasos del Curso
+        </a>
+        <a href="Simulador_Creacion_Agentes_Moodle.html" class="global-link-btn link-eval">
+            🧪 Simulador & Evaluación
+        </a>
+    </div>
+</div>
+
+<div class="moodle-container">
+    <!-- HEADER CLARO EPARTNERCLASS -->
+    <div class="header">
+        <div>
+            <span class="badge-basic">Nivel Básico • Laboratorio Fácil</span>
+            <h1 class="title"><span class="ep">E-PARTNER</span><span class="cl">CLASS</span> SIMULADOR FÁCIL</h1>
+            <p style="color:var(--text-muted); font-size:14px;">Crea y prueba tu Asistente de IA de forma sencilla</p>
+        </div>
+        <div class="logo-box">
+            <span class="p1">E-PARTNER</span><span class="p2">CLASS</span>
+        </div>
+    </div>
+
+    <!-- TABS DE HERRAMIENTA -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-builder')">1. Configurar mi Asistente</button>
+        <button class="tab-btn" onclick="switchTab('tab-simulator')">2. Probar Asistente</button>
+        <button class="tab-btn" onclick="switchTab('tab-checklist')">3. Lista de Chequeo Fácil</button>
+    </div>
+
+    <!-- TAB 1: BUILDER BÁSICO -->
+    <div id="tab-builder" class="tab-content">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">🤖 Tu Asistente Digital</div>
+                <div class="form-group">
+                    <label>Nombre de tu Asistente</label>
+                    <input type="text" id="agentName" value="Mi Asistente de Correos">
+                </div>
+                <div class="form-group">
+                    <label>¿En qué te ayudará principalmente?</label>
+                    <select id="agentTask">
+                        <option value="Redactar correos profesionales">Redactar correos profesionales</option>
+                        <option value="Resumir reportes y lecturas">Resumir reportes y lecturas</option>
+                        <option value="Organizar agenda y listas de tareas">Organizar agenda y listas de tareas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Instrucción Principal (Prompt)</label>
+                    <textarea id="agentPrompt">Eres un asistente de oficina muy atento. Responde siempre de forma amable, clara y breve.</textarea>
+                </div>
+                <button class="btn-action" onclick="saveBasicAgent()">Guardar mi Asistente</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">💡 Resumen de Configuración</div>
+                <div class="console-box" id="builderSummary">Haz clic en 'Guardar mi Asistente' para ver el resumen de tu configuración.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: SIMULATOR BÁSICO -->
+    <div id="tab-simulator" class="tab-content hidden">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">📥 Tu Mensaje de Prueba</div>
+                <div class="form-group">
+                    <label>Escribe una consulta para tu Asistente:</label>
+                    <textarea id="testInput">Ayúdame a redactar un correo breve avisando que la reunión de mañana será a las 10:00 AM.</textarea>
+                </div>
+                <button class="btn-action" onclick="runBasicSim()">▶️ Enviar Mensaje a mi Asistente</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">💬 Respuesta de tu Asistente</div>
+                <div class="console-box" id="simOutput">El asistente responderá aquí cuando presiones el botón.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: CHECKLIST BÁSICA -->
+    <div id="tab-checklist" class="tab-content hidden">
+        <div class="card">
+            <div class="card-header">📋 Lista de Chequeo de Calidad (Nivel Básico)</div>
+            <p style="color:var(--text-muted); font-size:13px; margin-bottom:15px;">
+                Verifica que tu Asistente tenga todo lo necesario para serte muy útil en tu día a día:
+            </p>
+
+            <table class="check-table">
+                <thead>
+                    <tr>
+                        <th>Punto a Verificar</th>
+                        <th>¿Cumple?</th>
+                        <th>Consejo EpartnerClass</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Nombre y Rol claro</strong></td>
+                        <td><input type="checkbox" checked> SÍ</td>
+                        <td>Saber quién es ayuda a que responda con la personalidad correcta.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Instrucción breve y precisa</strong></td>
+                        <td><input type="checkbox" checked> SÍ</td>
+                        <td>Evita darle demasiadas ordenes confusas a la vez.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Regla de cortesía</strong></td>
+                        <td><input type="checkbox" checked> SÍ</td>
+                        <td>Pedirle un tono amable genera mejores respuestas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Prueba en caso real</strong></td>
+                        <td><input type="checkbox" checked> SÍ</td>
+                        <td>Prueba siempre con 2 o 3 mensajes antes de usarlo en el trabajo.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.remove('hidden');
+        event.target.classList.add('active');
+    }
+
+    function saveBasicAgent() {
+        const name = document.getElementById('agentName').value;
+        const task = document.getElementById('agentTask').value;
+        const prompt = document.getElementById('agentPrompt').value;
+
+        const summary = `✅ ¡ASISTENTE GUARDADO CON ÉXITO!\n\n` +
+            `• Nombre: ${name}\n` +
+            `• Tarea: ${task}\n` +
+            `• Instrucción: "${prompt}"\n\n` +
+            `Ahora ve a la pestaña "2. Probar Asistente" para ver cómo responde.`;
+
+        document.getElementById('builderSummary').innerText = summary;
+        alert('✅ ¡Asistente guardado con éxito!');
+        switchTab('tab-simulator');
+    }
+
+    function runBasicSim() {
+        const input = document.getElementById('testInput').value;
+        const out = document.getElementById('simOutput');
+
+        out.innerText = "🤖 Tu Asistente está escribiendo la respuesta...\n";
+
+        setTimeout(() => {
+            out.innerText = `📩 RESPUESTA GENERADA:\n\n` +
+                `"Estimado equipo,\n\n` +
+                `Les confirmo que nuestra reunión programada para el día de mañana se llevará a cabo a las 10:00 AM.\n\n` +
+                `Quedo a su disposición ante cualquier duda.\nSaludos cordiales."\n\n` +
+                `✨ ¡Respuesta lista para usar!`;
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>

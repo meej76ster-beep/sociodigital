@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socio Digital - EpartnerClass (Nivel Básico)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ================= PALETA DE COLORES EPARTNERCLASS (LIGHT MODE) ================= */
+        :root {
+            --color-verde-lima: #7BB11D;
+            --color-amarillo-dorado: #F0A100;
+            --color-azul-turquesa: #26A3C8;
+            --color-fucsia-acento: #E10078;
+            --color-purpura-class: #5C2066;
+            
+            --bg-main: #f4f7fb;
+            --bg-card: #ffffff;
+            --bg-subtle: #eef3f9;
+            --border-light: #dce4ec;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* BARRA GLOBAL DE NAVEGACIÓN DEL CURSO (TOP APP BAR) */
+        .global-top-nav {
+            max-width: 1100px;
+            margin: 0 auto 20px auto;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .global-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .global-brand .ep { color: var(--color-azul-turquesa); }
+        .global-brand .cl { color: var(--color-purpura-class); }
+
+        .global-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .global-link-btn {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .link-home {
+            background: var(--bg-subtle);
+            color: var(--color-purpura-class);
+            border: 1px solid var(--border-light);
+        }
+
+        .link-home:hover {
+            border-color: var(--color-purpura-class);
+            background: #ffffff;
+        }
+
+        .link-steps {
+            background: var(--color-purpura-class);
+            color: #ffffff;
+        }
+
+        .link-eval {
+            background: var(--bg-subtle);
+            color: var(--color-azul-turquesa);
+            border: 1px solid var(--border-light);
+        }
+
+        .link-eval:hover {
+            border-color: var(--color-azul-turquesa);
+            background: #ffffff;
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .app-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .app-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--color-verde-lima), var(--color-amarillo-dorado), var(--color-azul-turquesa), var(--color-fucsia-acento));
+            border-radius: 16px 16px 0 0;
+        }
+
+        /* HEADER EPARTNERCLASS */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--color-azul-turquesa);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .badge-basic {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
+            background: var(--color-verde-lima);
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .title span.ep { color: var(--color-azul-turquesa); }
+        .title span.cl { color: var(--color-purpura-class); }
+
+        .subtitle {
+            font-size: 15px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .logo-box {
+            padding: 10px 18px;
+            background: var(--bg-subtle);
+            border: 2px solid var(--color-purpura-class);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .logo-box .p1 { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; color: var(--color-azul-turquesa); }
+        .logo-box .p2 { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; color: var(--color-purpura-class); margin-left: 3px; }
+
+        /* PROGRESO */
+        .progress-section {
+            margin-bottom: 25px;
+            background: var(--bg-subtle);
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-purpura-class);
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-bg {
+            background: #e2e8f0;
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 25%;
+            background: linear-gradient(90deg, var(--color-verde-lima), var(--color-azul-turquesa));
+            transition: width 0.4s ease;
+        }
+
+        /* PESTAÑAS DE PASOS DEL CURSO */
+        .step-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        .step-btn {
+            flex: 1;
+            padding: 12px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .step-btn:hover {
+            color: var(--color-purpura-class);
+            border-color: var(--color-azul-turquesa);
+        }
+
+        .step-btn.active {
+            background: var(--color-purpura-class);
+            color: #ffffff;
+            border-color: var(--color-purpura-class);
+            box-shadow: 0 4px 12px rgba(92, 32, 102, 0.25);
+        }
+
+        /* GRID Y CONTENIDO DE TARJETAS CLARAS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 850px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .card-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-purpura-class);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--color-amarillo-dorado);
+            padding-bottom: 8px;
+        }
+
+        /* FORMULARIOS */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-azul-turquesa);
+            box-shadow: 0 0 8px rgba(38, 163, 200, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 14px;
+            background: var(--color-verde-lima);
+            border: none;
+            border-radius: 10px;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(123, 177, 29, 0.3);
+            margin-top: 10px;
+        }
+
+        .btn-action:hover {
+            background: #6a9c18;
+            transform: translateY(-2px);
+        }
+
+        .output-box {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-light);
+            border-left: 4px solid var(--color-azul-turquesa);
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 13px;
+            color: var(--text-main);
+            white-space: pre-wrap;
+            min-height: 200px;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGACIÓN GLOBAL DEL CURSO -->
+<div class="global-top-nav">
+    <a href="Pantalla_Principal_Navegacion_EpartnerClass.html" class="global-brand">
+        <span class="ep">E-PARTNER</span><span class="cl">CLASS</span>
+    </a>
+    <div class="global-links">
+        <a href="Pantalla_Principal_Navegacion_EpartnerClass.html" class="global-link-btn link-home">
+            🏠 Menú Principal
+        </a>
+        <a href="Curso_Socio_Digital_EpartnerClass_App.html" class="global-link-btn link-steps">
+            📚 Pasos del Curso
+        </a>
+        <a href="Simulador_Creacion_Agentes_Moodle.html" class="global-link-btn link-eval">
+            🧪 Simulador & Evaluación
+        </a>
+    </div>
+</div>
+
+<div class="app-container">
+    <!-- HEADER -->
+    <div class="header">
+        <div>
+            <span class="badge-basic">Nivel Básico • Paso a Paso</span>
+            <h1 class="title">Curso <span class="ep">Socio Digital</span> <span class="cl">EpartnerClass</span></h1>
+            <p class="subtitle">Aprende a crear tu propio asistente de Inteligencia Artificial de forma sencilla</p>
+        </div>
+        <div class="logo-box">
+            <span class="p1">E-PARTNER</span><span class="p2">CLASS</span>
+        </div>
+    </div>
+
+    <!-- PROGRESO -->
+    <div class="progress-section">
+        <div class="progress-label">
+            <span>TU AVANCE EN EL CURSO</span>
+            <span id="progressText">PASO 1 DE 4 (25%)</span>
+        </div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+    </div>
+
+    <!-- PESTAÑAS DE PASOS DEL CURSO -->
+    <div class="step-nav">
+        <button class="step-btn active" onclick="showStep(1)">Paso 1: ¿Qué hará tu Socio?</button>
+        <button class="step-btn" onclick="showStep(2)">Paso 2: Escribe las Instrucciones</button>
+        <button class="step-btn" onclick="showStep(3)">Paso 3: Prueba tu Asistente</button>
+        <button class="step-btn" onclick="showStep(4)">Paso 4: Tu Plan de Uso</button>
+    </div>
+
+    <!-- PASO 1 -->
+    <div id="step1" class="step-content">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">💡 Paso 1: Define tu Reto Sencillo</div>
+                <p class="help-text">Elige una tarea diaria en la que quieras que la Inteligencia Artificial te ayude.</p>
+                
+                <div class="form-group">
+                    <label>¿En qué área o tarea necesitas ayuda?</label>
+                    <select id="s1Task">
+                        <option value="Redactar correos electrónicos y mensajes amables">Redactar correos electrónicos y mensajes amables</option>
+                        <option value="Resumir documentos y textos largos">Resumir documentos y textos largos</option>
+                        <option value="Organizar mis tareas de la semana">Organizar mis tareas de la semana</option>
+                        <option value="Atender preguntas frecuentes de clientes">Atender preguntas frecuentes de clientes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre cariñoso para tu Socio Digital</label>
+                    <input type="text" id="s1Name" value="Mi Asistente Amigable">
+                </div>
+
+                <button class="btn-action" onclick="generateStep1()">Crear la Tarjeta de mi Socio Digital</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📋 Ficha de mi Socio Digital</div>
+                <div class="output-box" id="s1Output">Aquí aparecerá el resumen de tu Socio Digital cuando presiones el botón verde.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PASO 2 -->
+    <div id="step2" class="step-content hidden">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">✏️ Paso 2: Escribe las Instrucciones (Prompt Fácil)</div>
+                <p class="help-text">Las instrucciones se componen de 3 partes muy simples: Rol, Tarea y Reglas.</p>
+
+                <div class="form-group">
+                    <label>1. Rol (¿Quién es?)</label>
+                    <input type="text" id="s2Role" value="Eres un asistente muy atento y educado.">
+                </div>
+
+                <div class="form-group">
+                    <label>2. Tarea Principal (¿Qué hace?)</label>
+                    <textarea id="s2Task">Tu trabajo es ayudarme a redactar y mejorar correos electrónicos de trabajo.</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>3. Regla de Oro (¿Cómo debe responder?)</label>
+                    <input type="text" id="s2Rule" value="Usa siempre un lenguaje claro, amable y sin faltas de ortografía.">
+                </div>
+
+                <button class="btn-action" onclick="generateStep2()">Generar las Instrucciones Completas</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📝 Las Instrucciones de tu Asistente</div>
+                <div class="output-box" id="s2Output">Presiona el botón para construir las instrucciones de tu asistente.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PASO 3 -->
+    <div id="step3" class="step-content hidden">
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">💬 Paso 3: Probar la Conversación</div>
+                <p class="help-text">Escribe un mensaje de prueba para ver cómo te respondería tu Socio Digital.</p>
+
+                <div class="form-group">
+                    <label>Tu mensaje para la prueba:</label>
+                    <textarea id="s3Message">Hola, necesito enviar un correo a un cliente pidiéndole disculpas porque nos retrasaremos 1 día en entregar el reporte.</textarea>
+                </div>
+
+                <button class="btn-action" onclick="runBasicSim()">▶️ Probar Respuesta del Asistente</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🤖 Respuesta de tu Socio Digital</div>
+                <div class="output-box" id="s3Output">Haz clic en 'Probar Respuesta' para ver la magia de la IA en acción.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PASO 4 -->
+    <div id="step4" class="step-content hidden">
+        <div class="card">
+            <div class="card-header">🎉 Paso 4: ¡Felicitaciones! Tu Plan de Uso Diario</div>
+            <p class="help-text" style="font-size:14px; margin-bottom:15px;">
+                Has completado la creación básica de tu Socio Digital. Revisa tu lista de logros:
+            </p>
+
+            <div class="grid-2">
+                <div>
+                    <div style="margin-bottom:10px;"><input type="checkbox" checked disabled> 1. Identifiqué una tarea clave para apoyarme con IA</div>
+                    <div style="margin-bottom:10px;"><input type="checkbox" checked disabled> 2. Escribí mis primeras instrucciones claras (Prompt)</div>
+                    <div style="margin-bottom:10px;"><input type="checkbox" checked disabled> 3. Probé la respuesta en un caso de la vida real</div>
+                    <div style="margin-bottom:10px;"><input type="checkbox" checked disabled> 4. Guardé mis instrucciones para usarlas todos los días</div>
+                    
+                    <button class="btn-action" onclick="generateCertificate()">Ver mi Plan Final</button>
+                </div>
+
+                <div>
+                    <div class="output-box" id="s4Output">Presiona 'Ver mi Plan Final' para consolidar tu aprendizaje en EpartnerClass.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showStep(stepNum) {
+        document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.step-btn').forEach(el => el.classList.remove('active'));
+
+        document.getElementById(`step${stepNum}`).classList.remove('hidden');
+        event.target.classList.add('active');
+
+        const fill = document.getElementById('progressBar');
+        const text = document.getElementById('progressText');
+        const pct = stepNum * 25;
+        fill.style.width = `${pct}%`;
+        text.innerText = `PASO ${stepNum} DE 4 (${pct}%)`;
+    }
+
+    function generateStep1() {
+        const task = document.getElementById('s1Task').value;
+        const name = document.getElementById('s1Name').value;
+
+        const res = `✨ ¡FICHA CREADA CON ÉXITO!\n\n` +
+            `👤 NOMBRE DEL ASISTENTE: ${name}\n` +
+            `🎯 TAREA PRINCIPAL: ${task}\n\n` +
+            `📌 OBJETIVO: Ahorrar tiempo en tus tareas diarias con la ayuda de EpartnerClass.`;
+        document.getElementById('s1Output').innerText = res;
+    }
+
+    function generateStep2() {
+        const role = document.getElementById('s2Role').value;
+        const task = document.getElementById('s2Task').value;
+        const rule = document.getElementById('s2Rule').value;
+
+        const compiled = `📝 TUS INSTRUCCIONES COMPLETAS (PROMPT):\n\n` +
+            `1. ROL: ${role}\n` +
+            `2. TAREA: ${task}\n` +
+            `3. REGLA: ${rule}\n\n` +
+            `💡 Consejo EpartnerClass: Puedes copiar este texto y pegarlo en ChatGPT o en tu IA favorita.`;
+        document.getElementById('s2Output').innerText = compiled;
+    }
+
+    function runBasicSim() {
+        const msg = document.getElementById('s3Message').value;
+        const output = document.getElementById('s3Output');
+
+        output.innerText = "🤖 Tu Asistente está escribiendo la respuesta...\n";
+
+        setTimeout(() => {
+            output.innerText = `📩 EJEMPLO DE RESPUESTA DE TU ASISTENTE:\n\n` +
+                `"Estimado cliente, espero que se encuentre muy bien. Le escribo para informarle que estamos dando los últimos retoques a su reporte. Para entregarle la mejor calidad posible, se lo enviaremos mañana a primera hora. Agradecemos mucho su comprensión."\n\n` +
+                `✨ ¡Listo! Tu Socio Digital ha redactado un correo muy educado y profesional.`;
+        }, 1000);
+    }
+
+    function generateCertificate() {
+        const cert = `🏆 ¡FELICITACIONES POR COMPLETAR EL NIVEL BÁSICO!\n\n` +
+            `Has aprendido a:\n` +
+            `• Identificar tareas donde la IA te ahorra tiempo.\n` +
+            `• Hablarle a la IA con claridad usando Rol, Tarea y Regla.\n` +
+            `• Probar y ajustar las respuestas para tu trabajo diario.\n\n` +
+            `EpartnerClass - "Haciendo la tecnología fácil y útil para ti"`;
+        document.getElementById('s4Output').innerText = cert;
+    }
+</script>
+
+</body>
+</html>

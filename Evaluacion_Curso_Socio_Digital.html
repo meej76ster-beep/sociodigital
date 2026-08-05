@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Final - Socio Digital EpartnerClass</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-verde-lima: #7BB11D;
+            --color-amarillo-dorado: #F0A100;
+            --color-azul-turquesa: #26A3C8;
+            --color-fucsia-acento: #E10078;
+            --color-purpura-class: #5C2066;
+            --color-whatsapp: #25D366;
+            
+            --bg-main: #f4f7fb;
+            --bg-card: #ffffff;
+            --bg-subtle: #eef3f9;
+            --border-light: #dce4ec;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* BARRA GLOBAL DE NAVEGACIÓN */
+        .global-top-nav {
+            max-width: 1000px;
+            margin: 0 auto 20px auto;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .global-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .global-brand .ep { color: var(--color-azul-turquesa); }
+        .global-brand .cl { color: var(--color-purpura-class); }
+
+        .global-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .global-link-btn {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .link-home { background: var(--bg-subtle); color: var(--color-purpura-class); border: 1px solid var(--border-light); }
+        .link-steps { background: var(--bg-subtle); color: var(--color-purpura-class); border: 1px solid var(--border-light); }
+        .link-sim { background: var(--bg-subtle); color: var(--color-azul-turquesa); border: 1px solid var(--border-light); }
+        .link-eval { background: var(--color-purpura-class); color: #ffffff; }
+
+        /* CONTENEDOR DE EVALUACIÓN */
+        .eval-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .eval-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--color-verde-lima), var(--color-amarillo-dorado), var(--color-azul-turquesa), var(--color-fucsia-acento));
+            border-radius: 16px 16px 0 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--color-azul-turquesa);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .badge-basic {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
+            background: var(--color-verde-lima);
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--color-purpura-class);
+        }
+
+        .brand-box {
+            padding: 10px 18px;
+            background: var(--bg-subtle);
+            border: 2px solid var(--color-purpura-class);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .brand-box .p1 { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 800; color: var(--color-azul-turquesa); }
+        .brand-box .p2 { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 800; color: var(--color-purpura-class); margin-left: 3px; }
+
+        /* PREGUNTAS */
+        .q-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-left: 5px solid var(--color-azul-turquesa);
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .q-card.q-drag { border-left-color: var(--color-fucsia-acento); }
+        .q-card.q-multi { border-left-color: var(--color-verde-lima); }
+
+        .q-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-purpura-class);
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .q-type-tag {
+            font-size: 11px;
+            font-weight: 700;
+            background: var(--bg-subtle);
+            color: var(--color-azul-turquesa);
+            padding: 3px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .q-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .opt-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .opt-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .opt-item:hover {
+            border-color: var(--color-azul-turquesa);
+            background: #ffffff;
+        }
+
+        .opt-item input {
+            width: auto;
+            cursor: pointer;
+        }
+
+        /* BOTONES DE ENVÍO Y WHATSAPP */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--color-verde-lima);
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(123, 177, 29, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #6a9c18;
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px;
+            background: var(--color-whatsapp);
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1eb956;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .results-card {
+            background: var(--bg-subtle);
+            border: 2px solid var(--color-verde-lima);
+            border-radius: 14px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .results-score {
+            font-family: 'Outfit', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--color-verde-lima);
+            margin: 10px 0;
+        }
+
+        .feedback-text {
+            font-size: 14px;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<!-- BARRA GLOBAL DE NAVEGACIÓN DEL CURSO -->
+<div class="global-top-nav">
+    <a href="Pantalla_Principal_Navegacion_EpartnerClass.html" class="global-brand">
+        <span class="ep">E-PARTNER</span><span class="cl">CLASS</span>
+    </a>
+    <div class="global-links">
+        <a href="Pantalla_Principal_Navegacion_EpartnerClass.html" class="global-link-btn link-home">
+            🏠 Menú Principal
+        </a>
+        <a href="Curso_Socio_Digital_EpartnerClass_App.html" class="global-link-btn link-steps">
+            📚 Pasos del Curso
+        </a>
+        <a href="Simulador_Creacion_Agentes_Moodle.html" class="global-link-btn link-sim">
+            🧪 Simulador de Asistentes
+        </a>
+        <a href="Evaluacion_Curso_Socio_Digital.html" class="global-link-btn link-eval">
+            📝 Evaluación Final
+        </a>
+    </div>
+</div>
+
+<div class="eval-wrapper">
+    <!-- HEADER -->
+    <div class="header">
+        <div>
+            <span class="badge-basic">Comprobación de Conocimientos</span>
+            <h1 class="title">Evaluación del Curso Socio Digital</h1>
+            <p style="color:var(--text-muted); font-size:14px;">Responde las 5 preguntas para obtener tu diagnóstico de aprendizaje</p>
+        </div>
+        <div class="brand-box">
+            <span class="p1">E-PARTNER</span><span class="p2">CLASS</span>
+        </div>
+    </div>
+
+    <form id="evalForm">
+
+        <!-- PREGUNTA 1: SELECCIÓN SIMPLE -->
+        <div class="q-card">
+            <div class="q-header">
+                <span>Pregunta 1 de 5</span>
+                <span class="q-type-tag">Selección Simple</span>
+            </div>
+            <div class="q-text">¿Cuál es el objetivo principal de crear un "Socio Digital" o Asistente de IA en tu trabajo diario?</div>
+            <div class="opt-list">
+                <label class="opt-item">
+                    <input type="radio" name="q1" value="A">
+                    A) Reemplazar por completo a todas las personas de la oficina.
+                </label>
+                <label class="opt-item">
+                    <input type="radio" name="q1" value="B">
+                    B) Ayudarte a ahorrar tiempo automatizando tareas repetitivas como redactar o resumir.
+                </label>
+                <label class="opt-item">
+                    <input type="radio" name="q1" value="C">
+                    C) Cambiar el sistema operativo de tu computadora.
+                </label>
+            </div>
+        </div>
+
+        <!-- PREGUNTA 2: SELECCIÓN SIMPLE -->
+        <div class="q-card">
+            <div class="q-header">
+                <span>Pregunta 2 de 5</span>
+                <span class="q-type-tag">Selección Simple</span>
+            </div>
+            <div class="q-text">¿Cuáles son las 3 partes fundamentales de una buena instrucción (Prompt) sencilla?</div>
+            <div class="opt-list">
+                <label class="opt-item">
+                    <input type="radio" name="q2" value="A">
+                    A) Nombre, Apellido y Teléfono.
+                </label>
+                <label class="opt-item">
+                    <input type="radio" name="q2" value="B">
+                    B) Rol (¿Quién es?), Tarea (¿Qué hace?) y Regla de Oro (¿Cómo debe responder?).
+                </label>
+                <label class="opt-item">
+                    <input type="radio" name="q2" value="C">
+                    C) Código HTML, Servidor web y Contraseña.
+                </label>
+            </div>
+        </div>
+
+        <!-- PREGUNTA 3: SELECCIÓN MÚLTIPLE -->
+        <div class="q-card q-multi">
+            <div class="q-header">
+                <span>Pregunta 3 de 5</span>
+                <span class="q-type-tag" style="color:var(--color-verde-lima)">Selección Múltiple</span>
+            </div>
+            <div class="q-text">¿Qué tareas son ideales para delegarle a tu Socio Digital? (Selecciona las 2 opciones correctas)</div>
+            <div class="opt-list">
+                <label class="opt-item">
+                    <input type="checkbox" name="q3" value="A">
+                    A) Redactar borradores de correos electrónicos amables.
+                </label>
+                <label class="opt-item">
+                    <input type="checkbox" name="q3" value="B">
+                    B) Servirte el café por las mañanas.
+                </label>
+                <label class="opt-item">
+                    <input type="checkbox" name="q3" value="C">
+                    C) Resumir reportes largos y extraer puntos clave.
+                </label>
+                <label class="opt-item">
+                    <input type="checkbox" name="q3" value="D">
+                    D) Firmar contratos bancarios sin supervisión.
+                </label>
+            </div>
+        </div>
+
+        <!-- PREGUNTA 4: SELECCIÓN MÚLTIPLE -->
+        <div class="q-card q-multi">
+            <div class="q-header">
+                <span>Pregunta 4 de 5</span>
+                <span class="q-type-tag" style="color:var(--color-verde-lima)">Selección Múltiple</span>
+            </div>
+            <div class="q-text">Al escribir la "Regla de Oro" en las instrucciones de tu IA, ¿qué buenas prácticas debes solicitarle? (Selecciona las 2 opciones correctas)</div>
+            <div class="opt-list">
+                <label class="opt-item">
+                    <input type="checkbox" name="q4" value="A">
+                    A) Que responda con un tono claro, educado y sin faltas de ortografía.
+                </label>
+                <label class="opt-item">
+                    <input type="checkbox" name="q4" value="B">
+                    B) Que invente respuestas falsas si no conoce la respuesta.
+                </label>
+                <label class="opt-item">
+                    <input type="checkbox" name="q4" value="C">
+                    C) Que adapte la respuesta al formato solicitado (por ejemplo, viñetas o texto breve).
+                </label>
+                <label class="opt-item">
+                    <input type="checkbox" name="q4" value="D">
+                    D) Que escriba todo en mayúsculas sostenidas.
+                </label>
+            </div>
+        </div>
+
+        <!-- PREGUNTA 5: ARRASTRAR / ASOCIAR CONCEPTOS -->
+        <div class="q-card q-drag">
+            <div class="q-header">
+                <span>Pregunta 5 de 5</span>
+                <span class="q-type-tag" style="color:var(--color-fucsia-acento)">Emparejamiento / Arrastrar</span>
+            </div>
+            <div class="q-text">Relaciona cada fragmento del Prompt con su componente correspondiente (Selecciona la categoría correcta para cada fragmento):</div>
+            
+            <div class="opt-list">
+                <div class="opt-item" style="justify-content:space-between;">
+                    <span>1. "Eres un asistente de servicio al cliente muy atento."</span>
+                    <select name="q5_1" style="width:auto; padding:6px 10px;">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="ROL">Rol</option>
+                        <option value="TAREA">Tarea</option>
+                        <option value="REGLA">Regla</option>
+                    </select>
+                </div>
+                <div class="opt-item" style="justify-content:space-between;">
+                    <span>2. "Resume el siguiente documento de ventas."</span>
+                    <select name="q5_2" style="width:auto; padding:6px 10px;">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="ROL">Rol</option>
+                        <option value="TAREA">Tarea</option>
+                        <option value="REGLA">Regla</option>
+                    </select>
+                </div>
+                <div class="opt-item" style="justify-content:space-between;">
+                    <span>3. "Usa máximo 3 párrafos y viñetas explicativas."</span>
+                    <select name="q5_3" style="width:auto; padding:6px 10px;">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="ROL">Rol</option>
+                        <option value="TAREA">Tarea</option>
+                        <option value="REGLA">Regla</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn-submit" onclick="gradeQuiz()">Enviar mis Respuestas y Ver Diagnóstico</button>
+    </form>
+
+    <!-- RESULTADOS -->
+    <div id="resultsCard" class="results-card hidden">
+        <h2 style="font-family:'Outfit',sans-serif; color:var(--color-purpura-class);">¡Evaluación Finalizada!</h2>
+        <div class="results-score" id="scoreDisplay">5 / 5 Puntos</div>
+        <div class="feedback-text" id="feedbackDisplay">Cargando diagnóstico...</div>
+
+        <!-- BOTÓN WHATSAPP -->
+        <a id="whatsappBtn" href="#" target="_blank" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:currentColor;">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+            <span>Enviar Resultado por WhatsApp al Tutor (+54 3781400468)</span>
+        </a>
+    </div>
+</div>
+
+<script>
+    function gradeQuiz() {
+        let score = 0;
+        const total = 5;
+
+        // Q1 (Correct: B)
+        const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+        if (q1 === 'B') score++;
+
+        // Q2 (Correct: B)
+        const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+        if (q2 === 'B') score++;
+
+        // Q3 (Correct: A and C checked, B and D unchecked)
+        const q3A = document.querySelector('input[name="q3"][value="A"]')?.checked;
+        const q3B = document.querySelector('input[name="q3"][value="B"]')?.checked;
+        const q3C = document.querySelector('input[name="q3"][value="C"]')?.checked;
+        const q3D = document.querySelector('input[name="q3"][value="D"]')?.checked;
+        if (q3A && q3C && !q3B && !q3D) score++;
+
+        // Q4 (Correct: A and C checked, B and D unchecked)
+        const q4A = document.querySelector('input[name="q4"][value="A"]')?.checked;
+        const q4B = document.querySelector('input[name="q4"][value="B"]')?.checked;
+        const q4C = document.querySelector('input[name="q4"][value="C"]')?.checked;
+        const q4D = document.querySelector('input[name="q4"][value="D"]')?.checked;
+        if (q4A && q4C && !q4B && !q4D) score++;
+
+        // Q5 (Correct: q5_1=ROL, q5_2=TAREA, q5_3=REGLA)
+        const q5_1 = document.querySelector('select[name="q5_1"]').value;
+        const q5_2 = document.querySelector('select[name="q5_2"]').value;
+        const q5_3 = document.querySelector('select[name="q5_3"]').value;
+        if (q5_1 === 'ROL' && q5_2 === 'TAREA' && q5_3 === 'REGLA') score++;
+
+        // MOSTRAR RESULTADOS
+        const card = document.getElementById('resultsCard');
+        const scoreDisp = document.getElementById('scoreDisplay');
+        const feedDisp = document.getElementById('feedbackDisplay');
+        const waBtn = document.getElementById('whatsappBtn');
+
+        card.classList.remove('hidden');
+        scoreDisp.innerText = `${score} / ${total} Puntos`;
+
+        let levelName = "";
+
+        if (score === 5) {
+            levelName = "Nivel Sobresaliente 🌟";
+            feedDisp.innerHTML = `🌟 <strong>¡Excelente resultado! Nivel Sobresaliente.</strong><br>Has demostrado dominar por completo los conceptos de Socio Digital, creación de Prompts (Rol + Tarea + Regla) y aplicación práctica en el trabajo. ¡Felicidades!`;
+        } else if (score >= 3) {
+            levelName = "Nivel Competente 👍";
+            feedDisp.innerHTML = `👍 <strong>¡Buen trabajo! Nivel Competente.</strong><br>Tienes una comprensión clara de cómo crear tu Socio Digital. Te recomendamos repasar el Paso 2 para perfeccionar tus instrucciones de Prompt.`;
+        } else {
+            levelName = "En Desarrollo 📚";
+            feedDisp.innerHTML = `📚 <strong>¡Sigue practicando!</strong><br>Te invitamos a volver a consultar los <strong>Pasos del Curso</strong> y probar en el <strong>Simulador</strong> para reforzar tus conocimientos sobre la fórmula Rol, Tarea y Regla.`;
+        }
+
+        // GENERAR ENLACE DE WHATSAPP
+        const phone = "543781400468";
+        const messageText = `¡Hola Tutor EpartnerClass! 🎓\n\nHe completado mi Evaluación Final del Curso "Socio Digital".\n\n📊 Mi Puntaje: ${score} / ${total} Puntos\n🏆 Nivel Alcanzado: ${levelName}\n\n¡Quedo a la espera de sus comentarios y certificado!`;
+
+        waBtn.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(messageText)}`;
+
+        card.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
